@@ -12,7 +12,14 @@ class UsersController extends Controller
         return view('users', compact('users'));
     }
     
-    public function user(){
-        //$user = \App\User::
+    public function user($name){
+        $user = \App\User::where('name', '=', $name)->firstOrFail();
+        return view('user', compact('user'));
+    }
+
+    public function userSubmissions($name){
+        $user = \App\User::where('name', '=', $name)->firstOrFail();
+        $links = \App\Link::where('user_id', '=', $user->id)->paginate(10);
+        return view('submissions', compact('links'));
     }
 }

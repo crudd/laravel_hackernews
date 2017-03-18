@@ -39,7 +39,12 @@
                 height: 10px;
                 border: 0px;
                 margin: 3px 2px 6px;
-                background: url(grayarrow.gif) no-repeat;
+            }
+            .upvote {
+                background: url(/css/grayarrow.gif) no-repeat;
+            }
+            li {
+                list-style: none;
             }
         </style>
     <!-- Scripts -->
@@ -67,6 +72,14 @@
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name') }}
                     </a>
+                    <ul  class="nav navbar-nav">
+                            <li><a>new</a></li>
+                            <li><a>comments</a></li>
+                            <li><a>show</a></li>
+                            <li><a>ask</a></li>
+                            <li><a>submit</a></li>
+                        </ul>
+                    
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">

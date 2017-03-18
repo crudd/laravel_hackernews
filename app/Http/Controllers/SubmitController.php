@@ -12,8 +12,9 @@ class SubmitController extends Controller
         return view('submit');
     }
 
-    public function submit(Request $request) {
-        $validator = Validator::make($request->all(), [
+    public function submit(Request $request) 
+    {
+        $validator = \Validator::make($request->all(), [
             'title' => 'required|max:255',
             'url' => 'required_without:text|max:255',
             'text' => 'required_without:url|max:255',
