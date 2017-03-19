@@ -13,38 +13,18 @@
 use Illuminate\Http\Request;
 
 Route::get('/', function () {
-    //$links = \App\Link::paginate(10);
-    $links = \App\Link::orderBy('updated_at', 'desc')->paginate(10);
-    return view('welcome', compact('links'));
+    $items = \App\Item::orderBy('updated_at', 'desc')->paginate(10);
+    return view('welcome', compact('items'));
 });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index');
-Route::get('/submit', 'SubmitController@index');
+Route::get('/item/{id}', function () {return 'Item';});
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/submit', 'SubmitController@index')->name('submit');
 Route::get('/users', 'UsersController@index');
 Route::get('/user/{name}', 'UsersController@user');
 Route::get('/user/{name}/submissions', 'UsersController@userSubmissions');
-Route::get('/upvote/{id}', function($id){
-    if (!Auth::check()){
-        return redirect('/login');
-    }
-    $user = Auth::id();
-    $link = \App\Link::where('id','=',$id)->firstOrFail();
-    $vote = \App\Vote::firstOrCreate(['link_id' => $link->id, 'user_id' => $user]);
-    $link->touch();
-    return redirect('/');
-});
-Route::get('/unvote/{id}', function($id){
-    if (!Auth::check()){
-        return redirect('/login');
-    }
-    $user = Auth::id();
-    $link = \App\Link::where('id','=',$id)->firstOrFail();
-    $unvote = \App\Vote::where(['link_id' =>  $link->id, 'user_id' => $user]);
-    $unvote->delete();
-    //$link->touch();
-    return redirect('/');
-});
+Route::get('/upvote/{id}', 'VotesController@upvote');
+Route::get('/unvote/{id}', "VotesController@unvote");
 
 Route::post('/submit', 'SubmitController@submit'); 

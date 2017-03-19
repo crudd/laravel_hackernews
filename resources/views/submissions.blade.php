@@ -3,7 +3,9 @@
 @section('content')
     <div class="container">
         <div class="row">
-            @include('shared.link_list')
+            @if ($items)
+                @include('shared.item_list')
+            @endif
         </div>
     </div>
 @endsection

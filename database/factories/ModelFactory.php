@@ -23,7 +23,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Link::class, function (Faker\Generator $faker) {
+$factory->define(App\Item::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->sentence,
         'url' => $faker->url,
@@ -34,7 +34,7 @@ $factory->define(App\Link::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Vote::class, function (Faker\Generator $faker) {
     return [
-        'link_id' => 1,
+        'item_id' => 1,
         'user_id' => 1,
     ];
 });

@@ -3,6 +3,9 @@
 @section('content')
     <div class="container">
         <div class="row">
+        @if (!$user)
+            No such user
+        @else
             <ul>
             <li>User: {{ $user->name }}</li>
             <li>Created: {{ $user->created_at->diffForHumans() }}</li>
@@ -12,6 +15,7 @@
             <li>comments</li>
             <li>favorites</li>
             </ul>
+        @endif
         </div>
     </div>
 @endsection

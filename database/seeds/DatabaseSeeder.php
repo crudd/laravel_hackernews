@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
         ]);
         factory(App\Vote::class)->create([
-            'link_id' => 2,
+            'item_id' => 2,
             'user_id' => 1,
         ]);
-        $this->call(LinksTableSeeder::class);
+        $this->call(ItemsTableSeeder::class);
     }
 }

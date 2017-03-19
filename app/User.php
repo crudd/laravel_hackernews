@@ -29,6 +29,6 @@ class User extends Authenticatable
 
     public function links()
     {
-        return $this->hasMany('App\Links');
+        return $this->hasMany('App\Items');
     }
 }

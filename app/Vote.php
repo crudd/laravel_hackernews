@@ -8,11 +8,11 @@ class Vote extends Model
 {
     protected $table = 'votes';
     protected $fillable = [
-        'user_id', 'link_id',
+        'user_id', 'item_id',
     ];
 
     public function links()
     {
-        return $this->hasOne('App\Links');
+        return $this->hasOne('App\Items');
     }
 }

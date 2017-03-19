@@ -7,6 +7,12 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class SubmitController extends Controller
 {
+    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         return view('submit');
@@ -14,23 +20,19 @@ class SubmitController extends Controller
 
     public function submit(Request $request) 
     {
-        $validator = \Validator::make($request->all(), [
+        $this->validate($request, [
             'title' => 'required|max:255',
-            'url' => 'required_without:text|max:255',
+            'url' => 'required_without:text|max:255|unique:items',
             'text' => 'required_without:url|max:255',
             'user_id' =>'required',
         ]);
-        if ($validator->fails()) {
-            return back()
-                ->withInput($request->input())
-                ->withErrors($validator);
-        }
-        $link = new \App\Link;
-        $link->title = $request->title;
-        $link->url = $request->url ?: 'NULL';
-        $link->text = $request->text ?: 'NULL';
-        $link->user_id = $request->user_id;
-        $link->save();
+
+        $item = new \App\Item;
+        $item->title = $request->title;
+        $item->url = $request->url;
+        $item->text = $request->text;
+        $item->user_id = $request->user_id;
+        $item->save();
         return redirect('/');
     }
 }

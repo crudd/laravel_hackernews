@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Link extends Model
+class Item extends Model
 {
-    protected $table = 'links';
+    protected $table = 'items';
      
      /**
-     * Get the username associated with the link.
+     * Get the username associated with the item.
      */
     public function user()
     {

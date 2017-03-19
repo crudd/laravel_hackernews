@@ -102,7 +102,10 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="/submit">Submit</a>
+                                        <a href="{{ route('home') }}">Home</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('submit') }}">Submit</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('logout') }}"
