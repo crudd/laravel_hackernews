@@ -15,9 +15,10 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
+            $table->string('title')->nullable();
             $table->string('url')->unique()->nullable();
             $table->text('text')->nullable();
+            $table->integer('parent')->default(0);
             $table->integer('user_id');
             $table->timestamps();
         });

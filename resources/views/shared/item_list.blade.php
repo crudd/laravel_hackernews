@@ -20,7 +20,18 @@
             |<div class="extra"><a href="/unvote/{{ $item->id }}">unvote</a></div>
         @endif       
         |<div class="extra"><a href="#">hide</a></div> 
-        |<div class="extra"><a href="/item/{{ $item->id }}">discuss</a></div>
+        |<div class="extra"><a href="/item/{{ $item->id }}">
+        @if ($item->comments)
+            {{ $item->comments->count() }}
+            @if ($item->comments->count()==1)
+                comment
+            @else
+                comments
+            @endif
+        @else
+            discuss
+        @endif
+        </a></div>
     </li>
     @endforeach
 </ul>

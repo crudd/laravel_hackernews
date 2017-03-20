@@ -73,11 +73,11 @@
                         {{ config('app.name') }}
                     </a>
                     <ul  class="nav navbar-nav">
-                            <li><a>new</a></li>
-                            <li><a>comments</a></li>
-                            <li><a>show</a></li>
-                            <li><a>ask</a></li>
-                            <li><a>submit</a></li>
+                            <li><a href="{{ route('new') }}">new</a></li>
+                            <li><a href="{{ route('submit') }}">comments</a></li>
+                            <li><a href="{{ route('submit') }}">show</a></li>
+                            <li><a href="{{ route('submit') }}">ask</a></li>
+                            <li><a href="{{ route('submit') }}">submit</a></li>
                         </ul>
                     
                 </div>

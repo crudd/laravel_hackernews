@@ -20,4 +20,9 @@ class Item extends Model
     {
         return $this->hasMany('App\Vote');
     }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Item', 'parent')->orderBy('id', 'desc');
+    }
 }
