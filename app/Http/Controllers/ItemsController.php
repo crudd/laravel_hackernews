@@ -54,7 +54,7 @@ class ItemsController extends Controller
         }
         $this->validate($request, [
             'title' => 'required_without:parent|max:255',
-            'url' => 'required_without:text|max:255|unique:items',
+            'url' => 'max:255|unique:items|nullable',
             'text' => 'required_without:url|max:255',
             'user_id' =>'required',
         ]);
