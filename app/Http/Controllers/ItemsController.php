@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Item;
+use App\Comment;
 use Illuminate\Http\Request;
 
 class ItemsController extends Controller
@@ -14,12 +15,13 @@ class ItemsController extends Controller
      */
     public function index()
     {
-        $items = \App\Item::where('parent', '=', '0')->orderBy('updated_at', 'desc')->paginate(10);
+        $items = \App\Item::where('parent', '=', 0)->orderBy('updated_at', 'desc')->paginate(10);
         return view('welcome', compact('items'));
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource sorted by newest.
+     * Instead of by recently updated
      *
      * @return \Illuminate\Http\Response
      */
@@ -47,9 +49,12 @@ class ItemsController extends Controller
      */
     public function store(Request $request)
     {
+        if (!$request->user_id){
+            return redirect('/login');
+        }
         $this->validate($request, [
             'title' => 'required_without:parent|max:255',
-            'url' => 'required_without:text|max:255|unique:items|nullable',
+            'url' => 'required_without:text|max:255|unique:items',
             'text' => 'required_without:url|max:255',
             'user_id' =>'required',
         ]);
@@ -65,7 +70,7 @@ class ItemsController extends Controller
             $parent->touch();
         }
         $item->save();
-        return redirect('/');
+        return redirect('/item/'.$request->parent);
     }
 
     /**
@@ -76,8 +81,24 @@ class ItemsController extends Controller
      */
     public function show(Item $item)
     {
+        //return $item;
         //$item = \App\Item::where('id', '=' ,$item)->firstOrFail();
-        return view('item', compact('item'));
+        if ($item->parent==0)
+        {
+            return view('item', compact('item'));
+        }else{
+            //determin if comments have children, and how to deal with them....
+            $comments = \App\Item::where('parent', '=', $item->id);
+            return view ('comment', compact('item', 'comments'));
+        }
+    }
+
+    /**
+    * Show comment for replying
+    */
+    public function comments(Item $item, Comment $comment)
+    {
+        return view('comment', compact('comment'));
     }
 
     /**

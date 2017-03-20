@@ -10,8 +10,10 @@ class Vote extends Model
     protected $fillable = [
         'user_id', 'item_id',
     ];
+    //protected $touches = ['items'];
 
-    public function links()
+
+    public function items()
     {
         return $this->hasOne('App\Items');
     }

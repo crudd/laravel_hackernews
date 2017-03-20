@@ -24,5 +24,11 @@ class Item extends Model
     public function comments()
     {
         return $this->hasMany('App\Item', 'parent')->orderBy('id', 'desc');
+        return $this->hasMany('App\Comment', 'parent')->orderBy('id', 'desc');
+    }
+
+    public function allComments()
+    {
+        return $this->comments()->with('allComments');
     }
 }

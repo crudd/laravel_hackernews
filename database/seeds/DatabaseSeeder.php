@@ -16,9 +16,10 @@ class DatabaseSeeder extends Seeder
             'name' => 'crudd',
             'password' => bcrypt('password'),
         ]);
-        factory(App\Vote::class)->create([
-            'item_id' => 2,
-            'user_id' => 1,
+        factory(App\User::class)->create([
+            'email' => 'user@user.com',
+            'name' => 'user',
+            'password' => bcrypt('password'),
         ]);
         $this->call(ItemsTableSeeder::class);
     }

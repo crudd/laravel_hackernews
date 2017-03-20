@@ -21,7 +21,7 @@
         @endif       
         |<div class="extra"><a href="#">hide</a></div> 
         |<div class="extra"><a href="/item/{{ $item->id }}">
-        @if ($item->comments)
+        @if ($item->comments->count())
             {{ $item->comments->count() }}
             @if ($item->comments->count()==1)
                 comment

@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 Route::get('/', 'ItemsController@index');
 Route::get('/new', 'ItemsController@new')->name('new');
 Route::get('/item/{item}', 'ItemsController@show');
+Route::get('/item/{item}/{comment}', 'ItemsController@comments');
 Route::get('/submit', 'ItemsController@create')->name('submit');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/users', 'UsersController@index');
