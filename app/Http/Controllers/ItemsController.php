@@ -64,13 +64,14 @@ class ItemsController extends Controller
         $item->url = $request->url;
         $item->text = $request->text;
         $item->user_id = $request->user_id;
+        $item->save();
         if ($request->parent){
             $item->parent = $request->parent;
             $parent = \App\Item::where('id', '=', $item->parent)->first();
             $parent->touch();
+            return redirect('/item/'.$request->parent);
         }
-        $item->save();
-        return redirect('/item/'.$request->parent);
+        return redirect('/');
     }
 
     /**
