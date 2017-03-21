@@ -24,7 +24,7 @@
                         <a href="{{ $item->url }}">{{ $item->title }}</a>
                         (<a href="//{!! parse_url($item->url, PHP_URL_HOST) !!}">{!! parse_url($item->url, PHP_URL_HOST) !!}</a>)   
                     @else
-                        <a href="item/{{ $item->id }}">{{ $item->title }}</a>
+                        <a href="/item/{{ $item->id }}">{{ $item->title }}</a>
                     @endif
                     <br>
                     <div class="extra">{{ $item->votes->count() }} points</div>
@@ -41,38 +41,10 @@
                     {{ $item->text }}
                 </li>
                 <li>
-                    <form action="/item/{{ $item->id }}/comment" method="post">
-                        {!! csrf_field() !!}
-                        <div><textarea rows="6" cols="60" id="text" name="text"></textarea></div>
-                        <input type="hidden" id="parent" name="parent" value="{{ $item->id }}">
-                        @if (!Auth::guest())
-                        <input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}">
-                        @endif
-                        <button type="submit" class="btn btn-default">Add comment</button>
-                    <form><br><br>
+                    @include('shared.commentForm')
                 </li>
-                <li>
-                   @foreach ($item->comments as $comment)
-                        <div class=""><a href="/user/{{ $comment->user_id }}">{{ $comment->user->name }}</a> {{ $comment->created_at->diffForHumans() }}</div>
-                        <div>{{ $comment->text }}</div>
-                        <a href="/item/{{ $comment->id }}">reply</a>
-                        @if ($comment->comments)
-                        <ul>                            
-                        @foreach ($comment->comments as $commentReply)
-                        <li>
-                            <div class=""><a href="/user/{{ $commentReply->user_id }}">{{ $commentReply->user->name }}</a> {{ $commentReply->created_at->diffForHumans() }}</div>
-                            <div>{{ $commentReply->text }}</div>
-                            <a href="/item/{{ $commentReply->id }}">reply</a>
-                        </li>
-                        @endforeach                         
-                        </ul>
-                        @endif
-                    @endforeach
-                    
-                    {{-- $item->allComments->count() --}}
-                </li>
-
             </ul>
+            @include('comments', ['comments' => $item->comments])
         </div>
     </div>
 @endsection

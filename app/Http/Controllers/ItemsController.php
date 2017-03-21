@@ -64,14 +64,16 @@ class ItemsController extends Controller
         $item->url = $request->url;
         $item->text = $request->text;
         $item->user_id = $request->user_id;
-        $item->save();
         if ($request->parent){
             $item->parent = $request->parent;
+            $item->save();
             $parent = \App\Item::where('id', '=', $item->parent)->first();
             $parent->touch();
-            return redirect('/item/'.$request->parent);
+            return redirect('/item/'.$parent->id);
+        }else{
+            $item->save();
+            return redirect('/');
         }
-        return redirect('/');
     }
 
     /**
@@ -82,24 +84,16 @@ class ItemsController extends Controller
      */
     public function show(Item $item)
     {
-        //return $item;
-        //$item = \App\Item::where('id', '=' ,$item)->firstOrFail();
+        $item->myComments = [];
+        foreach ($item->comments as $comment){
+        
+        }
         if ($item->parent==0)
         {
             return view('item', compact('item'));
         }else{
-            //determin if comments have children, and how to deal with them....
-            $comments = \App\Item::where('parent', '=', $item->id);
-            return view ('comment', compact('item', 'comments'));
+            return view ('comment', compact('item'));
         }
-    }
-
-    /**
-    * Show comment for replying
-    */
-    public function comments(Item $item, Comment $comment)
-    {
-        return view('comment', compact('comment'));
     }
 
     /**
