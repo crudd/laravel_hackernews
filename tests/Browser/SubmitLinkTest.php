@@ -35,7 +35,7 @@ class SubmitLinkTest extends DuskTestCase
             $browser->loginAs(User::find(1))
                 ->visit('/submit')
                 ->press('Submit')
-                ->assertSee('The title field is required.')
+                ->assertSee('The title field is required')
                 ->assertSee('The url field is required when text is not present.')
                 ->assertSee('The text field is required when url is not present.');
         });
