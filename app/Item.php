@@ -31,4 +31,10 @@ class Item extends Model
         return $this->comments()->with('allComments');
     }
 
+    public function getCommentsCount()
+    {
+        return $this->comments->first()->count();    //returns count of all items, not just thread comments :/
+        return $this->comments->where('id', '=', $this->id)->count(); //returns 0
+    }
+
 }

@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "crudd/laravel_hackernews",
+    "description": "HackerNews clone coded in Laravel 5.4, using Eloquent and Dusk.",
+    "keywords": ["hackernews", "laravel"],
     "license": "MIT",
     "type": "project",
     "require": {

@@ -74,9 +74,9 @@
                     </a>
                     <ul  class="nav navbar-nav">
                             <li><a href="{{ route('new') }}">new</a></li>
-                            <li><a href="{{ route('submit') }}">comments</a></li>
-                            <li><a href="{{ route('submit') }}">show</a></li>
-                            <li><a href="{{ route('submit') }}">ask</a></li>
+                            <li><a href="">comments</a></li>
+                            <li><a href="">show</a></li>
+                            <li><a href="">ask</a></li>
                             <li><a href="{{ route('submit') }}">submit</a></li>
                         </ul>
                     
