@@ -16,6 +16,7 @@ class Item extends Model
         return $this->belongsTo('App\User');
     }
     
+    
     public function votes()
     {
         return $this->hasMany('App\Vote');
@@ -33,8 +34,6 @@ class Item extends Model
 
     public function getCommentsCount()
     {
-        return $this->comments->first()->count();    //returns count of all items, not just thread comments :/
-        return $this->comments->where('id', '=', $this->id)->count(); //returns 0
-    }
+        return $this->allComments->count();
 
 }
