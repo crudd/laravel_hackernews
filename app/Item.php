@@ -16,7 +16,6 @@ class Item extends Model
         return $this->belongsTo('App\User');
     }
     
-    
     public function votes()
     {
         return $this->hasMany('App\Vote');
@@ -34,6 +33,7 @@ class Item extends Model
 
     public function getCommentsCount()
     {
-        return $this->allComments->count();
+        return $this->allComments->count();   
+    }
 
 }
