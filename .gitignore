@@ -9,4 +9,3 @@ Homestead.yaml
 .env
 phpunit.dusk.xml
 .dusk.env.local
-
