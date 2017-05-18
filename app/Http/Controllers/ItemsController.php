@@ -88,12 +88,12 @@ class ItemsController extends Controller
         foreach ($item->comments as $comment){
         
         }
-        if ($item->parent==0)
-        {
+       // if ($item->parent==0)
+       // {
             return view('item', compact('item'));
-        }else{
-            return view ('comment', compact('item'));
-        }
+       // }else{
+       //     return view ('comment', compact('item'));
+       // }
     }
 
     /**
